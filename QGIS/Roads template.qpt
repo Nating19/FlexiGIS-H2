@@ -1,0 +1,246 @@
+<Layout printResolution="300" name="Roads Infrastructure in Christchurch" units="mm" worldFileMap="{f984552e-c332-43f6-9771-c675d10ecf46}">
+ <Snapper snapToGuides="1" tolerance="5" snapToGrid="0" snapToItems="1"/>
+ <Grid offsetUnits="mm" resUnits="mm" offsetY="0" resolution="10" offsetX="0"/>
+ <PageCollection>
+  <symbol type="fill" name="" alpha="1" force_rhr="0" clip_to_extent="1">
+   <data_defined_properties>
+    <Option type="Map">
+     <Option type="QString" value="" name="name"/>
+     <Option name="properties"/>
+     <Option type="QString" value="collection" name="type"/>
+    </Option>
+   </data_defined_properties>
+   <layer locked="0" enabled="1" class="SimpleFill" pass="0">
+    <Option type="Map">
+     <Option type="QString" value="3x:0,0,0,0,0,0" name="border_width_map_unit_scale"/>
+     <Option type="QString" value="255,255,255,255" name="color"/>
+     <Option type="QString" value="miter" name="joinstyle"/>
+     <Option type="QString" value="0,0" name="offset"/>
+     <Option type="QString" value="3x:0,0,0,0,0,0" name="offset_map_unit_scale"/>
+     <Option type="QString" value="MM" name="offset_unit"/>
+     <Option type="QString" value="35,35,35,255" name="outline_color"/>
+     <Option type="QString" value="no" name="outline_style"/>
+     <Option type="QString" value="0.26" name="outline_width"/>
+     <Option type="QString" value="MM" name="outline_width_unit"/>
+     <Option type="QString" value="solid" name="style"/>
+    </Option>
+    <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
+    <prop v="255,255,255,255" k="color"/>
+    <prop v="miter" k="joinstyle"/>
+    <prop v="0,0" k="offset"/>
+    <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+    <prop v="MM" k="offset_unit"/>
+    <prop v="35,35,35,255" k="outline_color"/>
+    <prop v="no" k="outline_style"/>
+    <prop v="0.26" k="outline_width"/>
+    <prop v="MM" k="outline_width_unit"/>
+    <prop v="solid" k="style"/>
+    <data_defined_properties>
+     <Option type="Map">
+      <Option type="QString" value="" name="name"/>
+      <Option name="properties"/>
+      <Option type="QString" value="collection" name="type"/>
+     </Option>
+    </data_defined_properties>
+   </layer>
+  </symbol>
+  <LayoutItem excludeFromExports="0" type="65638" position="0,0,mm" blendMode="0" id="" positionLock="false" referencePoint="0" visibility="1" frame="false" size="297,210,mm" opacity="1" itemRotation="0" groupUuid="" templateUuid="{4b0358e7-a638-4aa5-af82-8738053a6b71}" outlineWidthM="0.3,mm" uuid="{4b0358e7-a638-4aa5-af82-8738053a6b71}" frameJoinStyle="miter" background="true" positionOnPage="0,0,mm" zValue="0">
+   <FrameColor alpha="255" red="0" blue="0" green="0"/>
+   <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
+   <LayoutObject>
+    <dataDefinedProperties>
+     <Option type="Map">
+      <Option type="QString" value="" name="name"/>
+      <Option name="properties"/>
+      <Option type="QString" value="collection" name="type"/>
+     </Option>
+    </dataDefinedProperties>
+    <customproperties>
+     <Option/>
+    </customproperties>
+   </LayoutObject>
+   <symbol type="fill" name="" alpha="1" force_rhr="0" clip_to_extent="1">
+    <data_defined_properties>
+     <Option type="Map">
+      <Option type="QString" value="" name="name"/>
+      <Option name="properties"/>
+      <Option type="QString" value="collection" name="type"/>
+     </Option>
+    </data_defined_properties>
+    <layer locked="0" enabled="1" class="SimpleFill" pass="0">
+     <Option type="Map">
+      <Option type="QString" value="3x:0,0,0,0,0,0" name="border_width_map_unit_scale"/>
+      <Option type="QString" value="255,255,255,255" name="color"/>
+      <Option type="QString" value="miter" name="joinstyle"/>
+      <Option type="QString" value="0,0" name="offset"/>
+      <Option type="QString" value="3x:0,0,0,0,0,0" name="offset_map_unit_scale"/>
+      <Option type="QString" value="MM" name="offset_unit"/>
+      <Option type="QString" value="35,35,35,255" name="outline_color"/>
+      <Option type="QString" value="no" name="outline_style"/>
+      <Option type="QString" value="0.26" name="outline_width"/>
+      <Option type="QString" value="MM" name="outline_width_unit"/>
+      <Option type="QString" value="solid" name="style"/>
+     </Option>
+     <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
+     <prop v="255,255,255,255" k="color"/>
+     <prop v="miter" k="joinstyle"/>
+     <prop v="0,0" k="offset"/>
+     <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+     <prop v="MM" k="offset_unit"/>
+     <prop v="35,35,35,255" k="outline_color"/>
+     <prop v="no" k="outline_style"/>
+     <prop v="0.26" k="outline_width"/>
+     <prop v="MM" k="outline_width_unit"/>
+     <prop v="solid" k="style"/>
+     <data_defined_properties>
+      <Option type="Map">
+       <Option type="QString" value="" name="name"/>
+       <Option name="properties"/>
+       <Option type="QString" value="collection" name="type"/>
+      </Option>
+     </data_defined_properties>
+    </layer>
+   </symbol>
+  </LayoutItem>
+  <GuideCollection visible="1"/>
+ </PageCollection>
+ <LayoutItem frame="true" boxSpace="2" uuid="{df05ee9f-e780-45cb-93e3-4e32a1c5a68f}" maxSymbolSize="0" symbolHeight="4" type="65642" columnCount="1" rasterBorder="1" size="52.5734,67,mm" positionOnPage="15.1575,71.5,mm" wmsLegendHeight="25" id="" visibility="1" background="true" zValue="3" map_uuid="{f984552e-c332-43f6-9771-c675d10ecf46}" groupUuid="" fontColor="#262626" opacity="1" symbolWidth="7" legendFilterByAtlas="0" excludeFromExports="0" templateUuid="{df05ee9f-e780-45cb-93e3-4e32a1c5a68f}" lineSpacing="1" position="15.1575,71.5,mm" blendMode="0" symbolAlignment="1" legendFilterByMap="1" columnSpace="2" rasterBorderWidth="0" title="" splitLayer="0" frameJoinStyle="round" resizeToContents="1" wmsLegendWidth="50" positionLock="false" equalColumnWidth="0" rasterBorderColor="0,0,0,255" outlineWidthM="0.3,mm" wrapChar="" titleAlignment="1" referencePoint="0" minSymbolSize="0" itemRotation="0">
+  <FrameColor alpha="255" red="210" blue="212" green="210"/>
+  <BackgroundColor alpha="255" red="238" blue="244" green="238"/>
+  <LayoutObject>
+   <dataDefinedProperties>
+    <Option type="Map">
+     <Option type="QString" value="" name="name"/>
+     <Option name="properties"/>
+     <Option type="QString" value="collection" name="type"/>
+    </Option>
+   </dataDefinedProperties>
+   <customproperties>
+    <Option/>
+   </customproperties>
+  </LayoutObject>
+  <styles>
+   <style indent="0" alignment="1" name="title" marginBottom="3.5">
+    <styleFont style="" description="DejaVu Sans,20,-1,5,50,0,0,0,0,0"/>
+   </style>
+   <style indent="0" alignment="1" name="group" marginTop="3">
+    <styleFont style="" description="DejaVu Sans,20,-1,5,50,0,0,0,0,0"/>
+   </style>
+   <style indent="0" alignment="1" name="subgroup" marginTop="3">
+    <styleFont style="" description="DejaVu Sans,19,-1,5,50,0,0,0,0,0"/>
+   </style>
+   <style indent="0" alignment="1" name="symbol" marginTop="2.5">
+    <styleFont style="" description="Cantarell,11,-1,5,50,0,0,0,0,0"/>
+   </style>
+   <style indent="0" alignment="1" name="symbolLabel" marginLeft="2" marginTop="2">
+    <styleFont style="" description="DejaVu Sans,19,-1,5,50,0,0,0,0,0"/>
+   </style>
+  </styles>
+  <layer-tree-group>
+   <customproperties>
+    <Option/>
+   </customproperties>
+   <layer-tree-layer id="landuse_landuse_shp_f13cf89a_b0e3_47a7_aa8f_f68cce29eaa7" legend_split_behavior="0" name="landuse — landuse/landuse.shp" source="/vsizip/../Downloads/landuse.zip/landuse/landuse.shp|layername=landuse" providerKey="ogr" legend_exp="" checked="Qt::Unchecked" expanded="0" patch_size="-1,-1">
+    <customproperties>
+     <Option type="Map">
+      <Option type="QString" value="landuse — landuse/landuse.shp" name="cached_name"/>
+     </Option>
+    </customproperties>
+   </layer-tree-layer>
+   <layer-tree-layer id="data_nz_nz_building_outlines_shp_41c981d3_27e7_4cdf_b02b_b2271801b27f" legend_split_behavior="0" name="data_nz — data_nz/nz-building-outlines.shp" source="/vsizip/../Downloads/data_nz.zip/data_nz/nz-building-outlines.shp|layername=nz-building-outlines" providerKey="ogr" legend_exp="" checked="Qt::Unchecked" expanded="1" patch_size="-1,-1">
+    <customproperties>
+     <Option type="Map">
+      <Option type="QString" value="data_nz — data_nz/nz-building-outlines.shp" name="cached_name"/>
+     </Option>
+    </customproperties>
+   </layer-tree-layer>
+   <layer-tree-layer id="buildings_buildings_shp_b69bc554_2a6a_4b0f_b11f_c2a068521371" legend_split_behavior="0" name="buildings — buildings/buildings.shp" source="/vsizip/../Downloads/buildings.zip/buildings/buildings.shp|layername=buildings" providerKey="ogr" legend_exp="" checked="Qt::Unchecked" expanded="0" patch_size="-1,-1">
+    <customproperties>
+     <Option type="Map">
+      <Option type="QString" value="buildings — buildings/buildings.shp" name="cached_name"/>
+     </Option>
+    </customproperties>
+   </layer-tree-layer>
+   <layer-tree-layer id="landuse___landuse_landuse_shp_641952f7_2d2d_41df_8360_ad3bcb67a81d" legend_split_behavior="0" name="landuse — landuse/landuse.shp copy" source="/vsizip/../Downloads/landuse.zip/landuse/landuse.shp|layername=landuse" providerKey="ogr" legend_exp="" checked="Qt::Unchecked" expanded="0" patch_size="-1,-1">
+    <customproperties>
+     <Option type="Map">
+      <Option type="QString" value="landuse — landuse/landuse.shp copy" name="cached_name"/>
+     </Option>
+    </customproperties>
+   </layer-tree-layer>
+   <layer-tree-layer id="highway_highway_shp_bd8ac9fe_c76d_410d_9ee7_574fe660e2f7" legend_split_behavior="0" name="highway — highway/highway.shp" source="/vsizip/../Downloads/highway.zip/highway/highway.shp|layername=highway" providerKey="ogr" legend_exp="" checked="Qt::Checked" expanded="1" patch_size="-1,-1">
+    <customproperties>
+     <Option type="Map">
+      <Option type="QString" value="highway" name="cached_name"/>
+      <Option type="QString" value="&lt;symbol type=&quot;line&quot; name=&quot;custom symbol&quot; alpha=&quot;1&quot; force_rhr=&quot;0&quot; clip_to_extent=&quot;1&quot;>&#xa; &lt;data_defined_properties>&#xa;  &lt;Option type=&quot;Map&quot;>&#xa;   &lt;Option type=&quot;QString&quot; value=&quot;&quot; name=&quot;name&quot;/>&#xa;   &lt;Option name=&quot;properties&quot;/>&#xa;   &lt;Option type=&quot;QString&quot; value=&quot;collection&quot; name=&quot;type&quot;/>&#xa;  &lt;/Option>&#xa; &lt;/data_defined_properties>&#xa; &lt;layer locked=&quot;0&quot; enabled=&quot;1&quot; class=&quot;SimpleLine&quot; pass=&quot;0&quot;>&#xa;  &lt;Option type=&quot;Map&quot;>&#xa;   &lt;Option type=&quot;QString&quot; value=&quot;0&quot; name=&quot;align_dash_pattern&quot;/>&#xa;   &lt;Option type=&quot;QString&quot; value=&quot;square&quot; name=&quot;capstyle&quot;/>&#xa;   &lt;Option type=&quot;QString&quot; value=&quot;5;2&quot; name=&quot;customdash&quot;/>&#xa;   &lt;Option type=&quot;QString&quot; value=&quot;3x:0,0,0,0,0,0&quot; name=&quot;customdash_map_unit_scale&quot;/>&#xa;   &lt;Option type=&quot;QString&quot; value=&quot;MM&quot; name=&quot;customdash_unit&quot;/>&#xa;   &lt;Option type=&quot;QString&quot; value=&quot;0&quot; name=&quot;dash_pattern_offset&quot;/>&#xa;   &lt;Option type=&quot;QString&quot; value=&quot;3x:0,0,0,0,0,0&quot; name=&quot;dash_pattern_offset_map_unit_scale&quot;/>&#xa;   &lt;Option type=&quot;QString&quot; value=&quot;MM&quot; name=&quot;dash_pattern_offset_unit&quot;/>&#xa;   &lt;Option type=&quot;QString&quot; value=&quot;0&quot; name=&quot;draw_inside_polygon&quot;/>&#xa;   &lt;Option type=&quot;QString&quot; value=&quot;bevel&quot; name=&quot;joinstyle&quot;/>&#xa;   &lt;Option type=&quot;QString&quot; value=&quot;214,39,40,255&quot; name=&quot;line_color&quot;/>&#xa;   &lt;Option type=&quot;QString&quot; value=&quot;solid&quot; name=&quot;line_style&quot;/>&#xa;   &lt;Option type=&quot;QString&quot; value=&quot;0.26&quot; name=&quot;line_width&quot;/>&#xa;   &lt;Option type=&quot;QString&quot; value=&quot;MM&quot; name=&quot;line_width_unit&quot;/>&#xa;   &lt;Option type=&quot;QString&quot; value=&quot;0&quot; name=&quot;offset&quot;/>&#xa;   &lt;Option type=&quot;QString&quot; value=&quot;3x:0,0,0,0,0,0&quot; name=&quot;offset_map_unit_scale&quot;/>&#xa;   &lt;Option type=&quot;QString&quot; value=&quot;MM&quot; name=&quot;offset_unit&quot;/>&#xa;   &lt;Option type=&quot;QString&quot; value=&quot;0&quot; name=&quot;ring_filter&quot;/>&#xa;   &lt;Option type=&quot;QString&quot; value=&quot;0&quot; name=&quot;trim_distance_end&quot;/>&#xa;   &lt;Option type=&quot;QString&quot; value=&quot;3x:0,0,0,0,0,0&quot; name=&quot;trim_distance_end_map_unit_scale&quot;/>&#xa;   &lt;Option type=&quot;QString&quot; value=&quot;MM&quot; name=&quot;trim_distance_end_unit&quot;/>&#xa;   &lt;Option type=&quot;QString&quot; value=&quot;0&quot; name=&quot;trim_distance_start&quot;/>&#xa;   &lt;Option type=&quot;QString&quot; value=&quot;3x:0,0,0,0,0,0&quot; name=&quot;trim_distance_start_map_unit_scale&quot;/>&#xa;   &lt;Option type=&quot;QString&quot; value=&quot;MM&quot; name=&quot;trim_distance_start_unit&quot;/>&#xa;   &lt;Option type=&quot;QString&quot; value=&quot;0&quot; name=&quot;tweak_dash_pattern_on_corners&quot;/>&#xa;   &lt;Option type=&quot;QString&quot; value=&quot;0&quot; name=&quot;use_custom_dash&quot;/>&#xa;   &lt;Option type=&quot;QString&quot; value=&quot;3x:0,0,0,0,0,0&quot; name=&quot;width_map_unit_scale&quot;/>&#xa;  &lt;/Option>&#xa;  &lt;prop v=&quot;0&quot; k=&quot;align_dash_pattern&quot;/>&#xa;  &lt;prop v=&quot;square&quot; k=&quot;capstyle&quot;/>&#xa;  &lt;prop v=&quot;5;2&quot; k=&quot;customdash&quot;/>&#xa;  &lt;prop v=&quot;3x:0,0,0,0,0,0&quot; k=&quot;customdash_map_unit_scale&quot;/>&#xa;  &lt;prop v=&quot;MM&quot; k=&quot;customdash_unit&quot;/>&#xa;  &lt;prop v=&quot;0&quot; k=&quot;dash_pattern_offset&quot;/>&#xa;  &lt;prop v=&quot;3x:0,0,0,0,0,0&quot; k=&quot;dash_pattern_offset_map_unit_scale&quot;/>&#xa;  &lt;prop v=&quot;MM&quot; k=&quot;dash_pattern_offset_unit&quot;/>&#xa;  &lt;prop v=&quot;0&quot; k=&quot;draw_inside_polygon&quot;/>&#xa;  &lt;prop v=&quot;bevel&quot; k=&quot;joinstyle&quot;/>&#xa;  &lt;prop v=&quot;214,39,40,255&quot; k=&quot;line_color&quot;/>&#xa;  &lt;prop v=&quot;solid&quot; k=&quot;line_style&quot;/>&#xa;  &lt;prop v=&quot;0.26&quot; k=&quot;line_width&quot;/>&#xa;  &lt;prop v=&quot;MM&quot; k=&quot;line_width_unit&quot;/>&#xa;  &lt;prop v=&quot;0&quot; k=&quot;offset&quot;/>&#xa;  &lt;prop v=&quot;3x:0,0,0,0,0,0&quot; k=&quot;offset_map_unit_scale&quot;/>&#xa;  &lt;prop v=&quot;MM&quot; k=&quot;offset_unit&quot;/>&#xa;  &lt;prop v=&quot;0&quot; k=&quot;ring_filter&quot;/>&#xa;  &lt;prop v=&quot;0&quot; k=&quot;trim_distance_end&quot;/>&#xa;  &lt;prop v=&quot;3x:0,0,0,0,0,0&quot; k=&quot;trim_distance_end_map_unit_scale&quot;/>&#xa;  &lt;prop v=&quot;MM&quot; k=&quot;trim_distance_end_unit&quot;/>&#xa;  &lt;prop v=&quot;0&quot; k=&quot;trim_distance_start&quot;/>&#xa;  &lt;prop v=&quot;3x:0,0,0,0,0,0&quot; k=&quot;trim_distance_start_map_unit_scale&quot;/>&#xa;  &lt;prop v=&quot;MM&quot; k=&quot;trim_distance_start_unit&quot;/>&#xa;  &lt;prop v=&quot;0&quot; k=&quot;tweak_dash_pattern_on_corners&quot;/>&#xa;  &lt;prop v=&quot;0&quot; k=&quot;use_custom_dash&quot;/>&#xa;  &lt;prop v=&quot;3x:0,0,0,0,0,0&quot; k=&quot;width_map_unit_scale&quot;/>&#xa;  &lt;data_defined_properties>&#xa;   &lt;Option type=&quot;Map&quot;>&#xa;    &lt;Option type=&quot;QString&quot; value=&quot;&quot; name=&quot;name&quot;/>&#xa;    &lt;Option name=&quot;properties&quot;/>&#xa;    &lt;Option type=&quot;QString&quot; value=&quot;collection&quot; name=&quot;type&quot;/>&#xa;   &lt;/Option>&#xa;  &lt;/data_defined_properties>&#xa; &lt;/layer>&#xa;&lt;/symbol>&#xa;" name="legend/custom-symbol-2"/>
+      <Option type="QString" value="highway" name="legend/title-label"/>
+     </Option>
+    </customproperties>
+   </layer-tree-layer>
+   <layer-tree-layer id="OSM_Standard_833e66c3_37bb_4ea3_ace0_d29a0a2c2318" legend_split_behavior="0" name="OSM Standard" source="type=xyz&amp;zmin=0&amp;zmax=19&amp;url=http://tile.openstreetmap.org/{z}/{x}/{y}.png" providerKey="wms" legend_exp="" checked="Qt::Unchecked" expanded="1" patch_size="-1,-1">
+    <customproperties>
+     <Option type="Map">
+      <Option type="QString" value="OSM Standard" name="cached_name"/>
+     </Option>
+    </customproperties>
+   </layer-tree-layer>
+   <custom-order enabled="0">
+    <item>buildings_buildings_shp_b69bc554_2a6a_4b0f_b11f_c2a068521371</item>
+    <item>highway_highway_shp_bd8ac9fe_c76d_410d_9ee7_574fe660e2f7</item>
+    <item>landuse_landuse_shp_f13cf89a_b0e3_47a7_aa8f_f68cce29eaa7</item>
+    <item>landuse___landuse_landuse_shp_641952f7_2d2d_41df_8360_ad3bcb67a81d</item>
+    <item>data_nz_nz_building_outlines_shp_41c981d3_27e7_4cdf_b02b_b2271801b27f</item>
+    <item>OSM_Standard_833e66c3_37bb_4ea3_ace0_d29a0a2c2318</item>
+   </custom-order>
+  </layer-tree-group>
+ </LayoutItem>
+ <LayoutItem excludeFromExports="0" type="65641" position="115.325,7.05,mm" blendMode="0" id="" positionLock="false" valign="128" referencePoint="0" visibility="1" frame="false" size="144.877,11.6325,mm" marginY="0" halign="4" opacity="1" labelText="Roads Infrastructure Christchurch" htmlState="0" itemRotation="0" groupUuid="" templateUuid="{8a211b44-a2d7-423b-a2d3-2a277effe408}" outlineWidthM="0.3,mm" uuid="{8a211b44-a2d7-423b-a2d3-2a277effe408}" frameJoinStyle="miter" marginX="0" background="false" positionOnPage="115.325,7.05,mm" zValue="2">
+  <FrameColor alpha="255" red="0" blue="0" green="0"/>
+  <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
+  <LayoutObject>
+   <dataDefinedProperties>
+    <Option type="Map">
+     <Option type="QString" value="" name="name"/>
+     <Option name="properties"/>
+     <Option type="QString" value="collection" name="type"/>
+    </Option>
+   </dataDefinedProperties>
+   <customproperties>
+    <Option/>
+   </customproperties>
+  </LayoutObject>
+  <LabelFont style="" description="DejaVu Sans,21,-1,5,50,0,0,0,0,0"/>
+  <FontColor alpha="255" red="38" blue="38" green="38"/>
+ </LayoutItem>
+ <LayoutItem excludeFromExports="0" isTemporal="0" type="65639" position="70.8525,18.6825,mm" blendMode="0" id="Map 1" positionLock="false" referencePoint="0" visibility="1" frame="false" size="226.148,191.317,mm" opacity="1" keepLayerSet="false" mapFlags="0" itemRotation="0" groupUuid="" templateUuid="{f984552e-c332-43f6-9771-c675d10ecf46}" drawCanvasItems="true" followPreset="false" outlineWidthM="0.3,mm" uuid="{f984552e-c332-43f6-9771-c675d10ecf46}" frameJoinStyle="miter" background="true" positionOnPage="70.8525,18.6825,mm" labelMargin="0,mm" followPresetName="" zValue="1" mapRotation="0">
+  <FrameColor alpha="255" red="0" blue="0" green="0"/>
+  <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
+  <LayoutObject>
+   <dataDefinedProperties>
+    <Option type="Map">
+     <Option type="QString" value="" name="name"/>
+     <Option name="properties"/>
+     <Option type="QString" value="collection" name="type"/>
+    </Option>
+   </dataDefinedProperties>
+   <customproperties>
+    <Option/>
+   </customproperties>
+  </LayoutObject>
+  <Extent xmax="19237447.19101428613066673" xmin="19191149.82247206196188927" ymin="-5410185.62672506272792816" ymax="-5371018.72545011527836323"/>
+  <LayerSet/>
+  <AtlasMap atlasDriven="0" scalingMode="2" margin="0.10000000000000001"/>
+  <labelBlockingItems/>
+  <atlasClippingSettings restrictLayers="0" enabled="0" forceLabelsInside="0" clippingType="1">
+   <layersToClip/>
+  </atlasClippingSettings>
+  <itemClippingSettings enabled="0" forceLabelsInside="0" clipSource="" clippingType="1"/>
+ </LayoutItem>
+ <customproperties>
+  <Option type="Map">
+   <Option type="QString" value="png" name="atlasRasterFormat"/>
+   <Option type="bool" value="true" name="singleFile"/>
+  </Option>
+ </customproperties>
+ <Atlas hideCoverage="0" enabled="0" coverageLayer="" filenamePattern="'output_'||@atlas_featurenumber" filterFeatures="0" sortFeatures="0" pageNameExpression=""/>
+</Layout>
