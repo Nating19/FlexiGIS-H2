@@ -183,7 +183,7 @@ weather_data:
 #=================================================================================#
 feedin_data_format:
 	@echo "\n Weather data in Feedinlib format"
-	@if [ -e $(target_file) ]; then python data_format.py $(lon_single_location) $(lat_single_location) $(target_file); fi
+	@if [ -e $(target_file) ]; then python data_format_updated.py $(lon_single_location) $(lat_single_location) $(target_file); fi
 	@echo "INFO: see ../data/01_raw_input_data, for csv files of weather data"
 
 #=================================================================================#

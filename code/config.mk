@@ -36,14 +36,14 @@
 # Change the following default values according to your respective system environment
 
 # 1. URL of the OSM raw data (used for OSM raw data download)
-OSM_raw_data_URL:=https://download.geofabrik.de/europe/germany/niedersachsen-latest.osm.pbf
+OSM_raw_data_URL:=https://download.geofabrik.de/australia-oceania/new-zealand-latest.osm.pbf
 
 # 2. Name of the OSM raw data file (used for data filtering by osmosis)
-OSM_raw_data:=../data/01_raw_input_data/niedersachsen-latest.osm.pbf
+OSM_raw_data:=../data/01_raw_input_data/new-zealand-latest.osm.pbf
 
 # 3. Name of the bounding polygon file (used for data filtering by osmosis)
 #    Use other polyfiles for other spatial areas
-polyfile:=../data/01_raw_input_data/Oldenburg.poly
+polyfile:=../data/01_raw_input_data/Christchurch.poly
 
 # 4. Specify the location of the osmosis binary file and its (alternative)
 #    temporary folder if more disk space is needed when filtering OSM raw data
@@ -67,11 +67,11 @@ osm2pgsql_num_processes:=1
 # 8. PostgreSQL connection parameters:
 #    The database will be created and hold the filtered OSM urban data
 postgres_cluster:=9.1/main
-postgres_database:=esy_Oldenburg_FlexiGIS_22_01_cc
-postgres_user:=esa
+postgres_database:=Christchurch_FlexiGIS_19_05_ss
+postgres_user:=stella
 postgres_port:=5432
-postgres_host:=10.160.84.200
-postgres_password:=pg3sa
+postgres_host:=localhost
+postgres_password:=FlexiBase23
 
 # 9. Default Location of the output folder
 # NOTE: Dont alter these variables!.
@@ -90,14 +90,14 @@ end_date:= 2015-12-31
 
 region:= 1 #set region to 1 or 0, if you wish to download weather for a region or for single location
 
-# For single coordinate or location single location (e.g single location in Oldenburg)
-lon_single_location:=8.15
-lat_single_location:=53.20
+# For single coordinate or location single location (e.g single location in Christchurch)
+lon_single_location:=172.63
+lat_single_location:=-43.53
 
-# For download of weather data for a region (e.g: Berlin region)
+# For download of weather data for a region (e.g: Christchurch region)
 # Longitude 'west'-'East' and Latitude 'North'-'South'
-lon_region:= 8.1,8.31
-lat_region:= 53.08,53.21
+lon_region:= 172.39,172.83
+lat_region:= -43.38,-43.63
 
 turbine_name:= E-101/3050
 hub_height:= 135
