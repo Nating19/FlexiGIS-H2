@@ -111,11 +111,23 @@ filter_data:
 	--tag-filter accept-relations landuse=* --used-node \
 	--bounding-polygon file=$(polyfile) \
 	--buffer outPipe.0=landuse_2 \
+	--read-pbf file=$(OSM_raw_data) \ 
+	--tag-filter accept-ways power=* --used-node \
+	--bounding-polygon file=$(polyfile) \ 
+	--buffer outPipe.0=power_1 \ 
+	--read-pbf file=$(OSM_raw_data) \ 
+	--tag-filter accept-nodes power=* --used-node \ 
+	--bounding-polygon file=$(polyfile) \ 
+	--buffer outPipe.0=power_2 \ 
+	--merge inPipe.0=power_1 inPipe.1=power_2 \ 
+	--buffer outPipe.0=power_all \
 	--merge inPipe.0=landuse_1 inPipe.1=landuse_2 \
 	--buffer outPipe.0=landuse_all \
 	--merge inPipe.0=landuse_all inPipe.1=building \
 	--buffer outPipe.0=landuse_building \
 	--merge inPipe.0=landuse_building inPipe.1=highway \
+	--buffer outPipe.0=landuse_building_highway \ 
+	--merge inPipe.0=landuse_building_highway inPipe.1=power_all \
 	--write-pbf file=$(OSM_merged_data) >> log/osmosis.log 2>&1;
 	@echo "osmosis data filtering done." >> log/osmosis.log
 	@date >> log/osmosis.log
