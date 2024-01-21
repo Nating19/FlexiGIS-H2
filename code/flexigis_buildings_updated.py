@@ -1,218 +1,161 @@
-import osmium
-from shapely.geometry import Polygon
-from pyproj import Transformer 
+"""
+Created on 19/01/2024
 
-pbf_file_path = "/home/stella/FlexiGIS-H2/data/01_raw_input_data/02-UrbanInfrastructure.osm.pbf"
+@author: sns51
 
-class UrbanHandler(osmium.SimpleHandler):
-    def __init__(self):
-        super(UrbanHandler, self).__init__()
-        self.data = []  # set an empty list where content can be appended to
-        self.nodes = []
-    def way(self, w):
-        try:
-            nodes_data = [(node.lon, node.lat) for node in w.nodes]
-            #print(f"works for way {w.id} with nodes: {w.nodes}")
-            # Check if there are enough nodes to form a polygon
-            if len(nodes_data) >= 3:
-                # Ensure that the first and last coordinates are the same to close the polygon
-                if nodes_data[0] != nodes_data[-1]:
-                    nodes_data.append(nodes_data[0])
-
-                # Create a Shapely Polygon                                  # TODO not sure if this is in the correct CRS to calculate the area
-                polygon = Polygon(nodes_data)
-                area = polygon.area
-                # Append the polygon to the data list
-                self.data.append(area)
-                self.nodes.append(nodes_data)
-            #if w.id == 1170428557:
-            #    print(f"Works for way {w.id} with nodes: {w.nodes}")
-            #    print(f"Processing way {w.id}:")
-            #    for tag in w.tags:
-            #        print(f"  {tag.k}: {tag.v}")
-            #    for node in w.nodes:
-            #        print(f"    Node ID: {node}")
-                    #print(f"    Node ID: {node.ref}, Latitude: {node.lat}, Longitude: {node.lon}")
-        except osmium.InvalidLocationError:
-            print(f"Invalid location for way {w.id} with nodes: {w.nodes}")
-            #print(f"Processing way {w.id}:")
-            #for tag in w.tags:
-            #    print(f"  {tag.k}: {tag.v}")
-            #for node in w.nodes:
-            #    print(f"    Node ID: {node}")
-                #print(f"    Node ID: {node.ref}, Latitude: {node.lat}, Longitude: {node.lon}")
-            #print(f"Node IDs and coordinates: {[(node.lon, node.lat) for node in w.nodes]}")
-            #print(f"Tags: {w.tags}")
-            #if w.id == 1170428559:
-            #    print(f"Processing way {w.id}:")
-            #    for tag in w.tags:
-            #        print(f"  {tag.k}: {tag.v}")
-            #    for node in w.nodes:
-            #        print(f"    Node ID: {node}")
-                    #print(f"    Node ID: {node.ref}, Latitude: {node.lat}, Longitude: {node.lon}")
-
-
-h = UrbanHandler()
-h.apply_file(pbf_file_path, locations=True)
-
-print(h.data)
-
-
-class UrbanHandler(osmium.SimpleHandler):
-    def __init__(self):
-        super(UrbanHandler, self).__init__()
-        self.data = [] # set empty list, where content can be append to
-
-    def way(self, w):
-#        if w.tags.get('landuse') == 'residential' and 'name' in w.tags:
-        nodes_data = [(node.lon, node.lat) for node in w.nodes]
-        #if len(nodes_data) >= 3:
-                # Ensure that the first and last coordinates are the same to close the polygon
-            #if nodes_data[0] != nodes_data[-1]:
-                #nodes_data.append(nodes_data[0])
-                    #polygon = Polygon(nodes_data).exterior.xy
-                    #polygon = Polygon(nodes_data[0])
-                    #self.data2.append(polygon)
-        self.data.append(nodes_data)
-        # Create a Shapely Polygon
-        
-        
-#            self.data.append(w.tags['name'])
-        
-h = UrbanHandler()
-h.apply_file(pbf_file_path, locations=True)
-
-print(sorted(h.data))
-
-
-
-        def way(self, w):
-        # Check if the way has building or landuse tags
-        if "building" in w.tags or "landuse" in w.tags:
-            result = self.area_and_polygon(w)
-            if result:
-                self.data.append(result)
-
-
-
-class CounterHandler(osmium.SimpleHandler):
-    def __init__(self):
-        osmium.SimpleHandler.__init__(self)
-        self.num_nodes = 0
-
-    def node(self, n):
-        self.num_nodes += 1
-h = CounterHandler()
-h.apply_file(pbf_file_path)
-print("Number of nodes: %d" % h.num_nodes)
-
-import osmium
-import shapely.wkb as wkblib
-
-pbf_file_path = "/home/stella/FlexiGIS-H2/data/01_raw_input_data/02-UrbanInfrastructure.osm.pbf"
-
-# A global factory that creates WKB from a osmium geometry
-wkbfab = osmium.geom.WKBFactory()
-
-class WayLenHandler(osmium.SimpleHandler):
-    def __init__(self):
-        osmium.SimpleHandler.__init__(self)
-        self.total = 0
-
-    def way(self, w):
-        wkb = wkbfab.create_linestring(w)
-        line = wkblib.loads(wkb, hex=True)
-        # Length is computed in WGS84 projection, which is practically meaningless.
-        # Lets pretend we didn't notice, it is an example after all.
-        self.total += line.length
-
-h = WayLenHandler()
-h.apply_file(pbf_file_path, locations=True)
-print("Total length: %f" % h.total)
-
-
-
-
-
-
-
+"""
 
 import osmium
 import pandas as pd
 from shapely.geometry import Polygon
-from pyproj import Transformer                                         #NEW
+from shapely import wkt
+import geopandas as gpd
+from geopandas import GeoDataFrame
 
-transformer = Transformer.from_crs("EPSG:4326", "EPSG:3857")
+#######################################################################################################
 
-class OSMHandler(osmium.SimpleHandler):
+# Supply own building shapefile
+own_input = True
+shapefile_path = '../data/01_raw_input_data/buildings/Christchurch/nz-building-outlines.shp'
+
+#######################################################################################################
+
+pbf_file_path = "../data/01_raw_input_data/02-UrbanInfrastructure.osm.pbf"
+main_destination = "../data/02_urban_output_data/"
+
+class UrbanHandler(osmium.SimpleHandler):
+    """Get landuse and building data from oms.pbf file."""
     def __init__(self):
-        super(OSMHandler, self).__init__()
-        self.data = []
-        self.ways_building = "building"
-        self.ways_landuse = "landuse"
-
-    def area_and_polygon(self, way):
-        try:
-
-            # Convert the way's geometry to a list of coordinate tuples
-            nodes_data = [(node.lon, node.lat) for node in way.nodes]
-
-            # Check if there are enough nodes to form a polygon
-            if len(nodes_data) >= 3:
-                # Ensure that the first and last coordinates are the same to close the polygon
-                if nodes_data[0] != nodes_data[-1]:
-                    nodes_data.append(nodes_data[0])
-                
-                
-
-                transformed_coordinates = []
-                for pt in transformer.itransform(nodes_data):
-                    transformed = '{:.3f} {:.3f}'.format(*pt)
-                    transformed_coordinates.append(transformed)
-
-                # Create a Shapely Polygon
-#                polygon = Polygon(nodes_data).exterior.xy
-
-#                transformer = Transformer.from_crs("EPSG:4326", "EPSG:3857")
-#                transformed_polygon = transformer.transform(polygon)
-
-                # Create a Shapely Polygon
-                polygon = Polygon(transformed_coordinates)
-
-                # Calculate the area of the polygon
-                area = polygon.area
-
-                # Extract building and landuse tags
-                building = way.tags.get(self.ways_building, None)
-                landuse = way.tags.get(self.ways_landuse, None)
-
-                # Return the OSM ID, area, and polygon as a tuple
-                return way.id, building, landuse, area, polygon.wkt
-
-            else:
-                print(f"Error processing way {way.id}: Not enough nodes to form a polygon")
-                return None
-
-        except Exception as e:
-            print(f"Error processing way {way.id}: {e}")
-            return None
+        super(UrbanHandler, self).__init__()
+        self.landuse =[]
+        self.building =[]  
+        self.osm_id =[] 
+        self.geometry =[] 
+        self.ways_building = 'building'
+        self.ways_landuse = 'landuse'
 
     def way(self, w):
-        # Check if the way has building or landuse tags
         if "building" in w.tags or "landuse" in w.tags:
-            result = self.area_and_polygon(w)
-            if result:
-                self.data.append(result)
+            try:
+                nodes_data = [(node.lon, node.lat) for node in w.nodes]
 
-def process_osm_pbf(pbf_file):
-    handler = OSMHandler()
-    handler.apply_file(pbf_file, locations=True)
+                # Check if there are enough nodes to form a polygon
+                if len(nodes_data) >= 3:
+                    # Ensure that the first and last coordinates are the same to close the polygon
+                    if nodes_data[0] != nodes_data[-1]:
+                        nodes_data.append(nodes_data[0])
+                    
+                    print(f"Processing way {w.id}")
 
-    # Create a DataFrame from the collected data
-    df = pd.DataFrame(handler.data, columns=["osm_id", "building", "landuse", "area", "polygon"])
+                    # Create a Shapely Polygon
+                    polygon = Polygon(nodes_data)
+                    poly = polygon.wkt
+                    # Append the polygon to the data list
+                    self.geometry.append(poly)
 
-    return df
+                    # Extract building and landuse tags
+                    building = w.tags.get(self.ways_building, None)
+                    landuse = w.tags.get(self.ways_landuse, None)
 
-# Example usage:
-pbf_file_path = "/home/stella/FlexiGIS-H2/data/01_raw_input_data/02-UrbanInfrastructure.osm.pbf"
-osm3_df = process_osm_pbf(pbf_file_path)
+                    self.building.append(building)
+                    self.landuse.append(landuse)
+
+                    osm_id = w.id
+                    self.osm_id.append(osm_id)
+
+            except osmium.InvalidLocationError:
+                print(f"Invalid location for way {w.id} with nodes: {w.nodes}")
+
+u = UrbanHandler()
+u.apply_file(pbf_file_path, locations=True)
+
+osmrows = [u.osm_id, u.building, u.landuse, u.geometry]
+urban_df = pd.DataFrame(osmrows).T
+urban_df.columns =["osm_id", "building", "landuse", "geometry"] 
+urban_df['geometry'] = urban_df['geometry'].apply(wkt.loads) # converts str into shapely geometry object
+urban_df = GeoDataFrame(urban_df, geometry='geometry')
+urban_df.crs = 'EPSG:4326'
+urban_df = urban_df.to_crs('EPSG:3857')
+urban_df['area'] = urban_df.geometry.area 
+
+# Building data correction
+"""Get building data."""
+data_building = urban_df.drop(columns=["landuse"])
+data_building = data_building.dropna().sort_values(by="building")
+
+"""Get landuse data."""
+# Landuse data correction
+df_landuse = urban_df.drop(columns=["building"])
+data_landuse = df_landuse.dropna().sort_values(by="landuse")
+
+if own_input:
+
+    # Read the shapefile and converts it into a GeoDataFrame
+    gpd_buildings = gpd.read_file(shapefile_path)
+    gpd_buildings = gpd_buildings[['building_i', 'suburb_loc', 'name', 'use', 'town_city', 'geometry']]
+    gpd_buildings = gpd_buildings.rename(columns={'suburb_loc': 'suburb'})
+    gpd_buildings = gpd_buildings.to_crs('EPSG:3857')
+
+    res_intersects = gpd.overlay(gpd_buildings, data_landuse, how="intersection")
+    rew = gpd.overlay(res_intersects, data_building, how="intersection", keep_geom_type=False)
+    rew = rew.drop(columns=['name','town_city','suburb','area_1', 'area_2'])
+    rew.loc[rew['building'] == 'yes', 'building'] = rew.loc[rew['building'] == 'yes','landuse']
+    w=res_intersects.merge(rew, how="left", on='building_i')
+
+    w.loc[w.building.isna(),'building']=w.loc[w.building.isna(),'landuse_x']
+    w.loc[w['use_x'] == 'School','building'] = 'educational'
+    w.loc[w['use_x'] == 'Hospital','building'] = 'institutional'
+    w.loc[w['use_x'] == 'Supermarket','building'] = 'commercial'
+    
+    w = w.rename(columns={'geometry_x': 'geometry','building_i':'building_id'})
+    w = w.drop(columns=["name", "use_x", "town_city", "use_y", "osm_id_1", "osm_id_2", "landuse_y","geometry_y", 'osm_id','landuse_x','area'])
+    w['area'] = gpd.GeoSeries(w.geometry).area
+        
+else:
+    w = gpd.overlay(data_building, data_landuse, how="intersection", keep_geom_type=False)
+    w.loc[w['building'] == 'yes', 'building'] = w.loc[w['building'] == 'yes','landuse']
+    w = w.drop(columns=["osm_id_2", "area_2",'landuse',])
+    w = w.rename(columns={'osm_id_1': 'osm_1','area_1':'area'})
+
+data_landuse.loc[data_landuse['landuse'].isin(['farmland', 'farmyard']),'landuse'] = 'agricultural'  
+data_landuse.loc[data_landuse['landuse'] == 'education','landuse'] = 'educational'
+data_landuse.loc[data_landuse['landuse'] == 'retail','landuse'] = 'commercial'
+data_landuse.loc[data_landuse['landuse'] == 'vineyard','landuse'] = 'industrial'
+
+data_landuse.to_file(main_destination+"landuse", driver='ESRI Shapefile')
+data_landuse.to_csv(main_destination+"landuse.csv", encoding="utf8")
+
+w.loc[w['building'].isin(['warehouse', 'vineyard']),'building'] = 'industrial'
+w.loc[w['building'].isin(['community_center', 'hospital','government','public','fire_station']),'building'] = 'institutional'
+w.loc[w['building'].isin(['apartments', 'house','cabin', 'semidetached_house','dormitory']),'building'] = 'residential'
+w.loc[w['building'].isin(['retail', 'office', 'cabin', 'motel', 'hotel', 'hostel']),'building'] = 'commercial'
+w.loc[w['building'].isin(['kindergarten', 'school', 'university', 'class_room']),'building'] = 'educational'
+w.loc[w['building'].isin(['farmland', 'farmyard', 'farm_auxiliary']),'building'] = 'agricultural'
+
+w = gpd.GeoDataFrame(w, geometry='geometry')
+w.to_file(main_destination+"buildings", driver='ESRI Shapefile')
+w.to_csv(main_destination+"buildings.csv", encoding="utf8")
+
+# residential
+b_r = w.loc[w['building'] == 'residential']
+b_r.to_file(main_destination+"residential", driver='ESRI Shapefile')
+
+# industrial
+b_i = w.loc[w['building'] == 'industrial']
+b_r.to_file(main_destination+"industrial", driver='ESRI Shapefile')
+
+# commercial
+b_c = w.loc[w['building'] == 'commercial']
+b_c.to_file(main_destination+"commercial", driver='ESRI Shapefile')
+
+# agricultural
+b_a = w.loc[w['building'] == 'agricultural']
+b_a.to_file(main_destination+"agricultural", driver='ESRI Shapefile')
+
+# educational
+b_e = w.loc[w['building'] == 'educational']
+b_e.to_file(main_destination+"educational", driver='ESRI Shapefile')
+
+# institutional
+b_inst = w.loc[w['building'] == 'institutional']
+b_inst.to_file(main_destination+"institutional", driver='ESRI Shapefile')
