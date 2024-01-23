@@ -131,6 +131,7 @@ w.loc[w['building'].isin(['apartments', 'house','cabin', 'semidetached_house','d
 w.loc[w['building'].isin(['retail', 'office', 'cabin', 'motel', 'hotel', 'hostel']),'building'] = 'commercial'
 w.loc[w['building'].isin(['kindergarten', 'school', 'university', 'class_room']),'building'] = 'educational'
 w.loc[w['building'].isin(['farmland', 'farmyard', 'farm_auxiliary']),'building'] = 'agricultural'
+w.loc[~w['building'].isin(['residential', 'commercial', 'agricultural', 'educational', 'institutional', 'industrial']),'building'] = 'other'
 
 w = gpd.GeoDataFrame(w, geometry='geometry')
 w.to_file(main_destination+"buildings", driver='ESRI Shapefile')
@@ -159,3 +160,7 @@ b_e.to_file(main_destination+"educational", driver='ESRI Shapefile')
 # institutional
 b_inst = w.loc[w['building'] == 'institutional']
 b_inst.to_file(main_destination+"institutional", driver='ESRI Shapefile')
+
+# other
+b_r = w.loc[w['building'] == 'other']
+b_r.to_file(main_destination+"other", driver='ESRI Shapefile')
