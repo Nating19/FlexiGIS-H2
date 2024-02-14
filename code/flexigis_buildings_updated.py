@@ -13,15 +13,16 @@ import geopandas as gpd
 from geopandas import GeoDataFrame
 
 #######################################################################################################
+city='Karlsruhe'
 
 # Supply own building shapefile
-own_input = True
-shapefile_path = '../data/01_raw_input_data/buildings/Christchurch/nz-building-outlines.shp'
+own_input = False    # True for New Zealand, false for Germany
+shapefile_path = '../data/01_raw_input_data/buildings/'+city+'/nz-building-outlines.shp'
 
 #######################################################################################################
 
-pbf_file_path = "../data/01_raw_input_data/02-UrbanInfrastructure.osm.pbf"
-main_destination = "../data/02_urban_output_data/"
+pbf_file_path = "../data/01_raw_input_data/"+city+"/"+"02-UrbanInfrastructure.osm.pbf"
+main_destination = "../data/02_urban_output_data/"+city+"/"
 
 class UrbanHandler(osmium.SimpleHandler):
     """Get landuse and building data from oms.pbf file."""
@@ -134,6 +135,7 @@ w.loc[w['building'].isin(['farmland', 'farmyard', 'farm_auxiliary']),'building']
 w.loc[~w['building'].isin(['residential', 'commercial', 'agricultural', 'educational', 'institutional', 'industrial']),'building'] = 'other'
 
 w = gpd.GeoDataFrame(w, geometry='geometry')
+w = w[w['geometry'].geom_type == 'Polygon']
 w.to_file(main_destination+"buildings", driver='ESRI Shapefile')
 w.to_csv(main_destination+"buildings.csv", encoding="utf8")
 
