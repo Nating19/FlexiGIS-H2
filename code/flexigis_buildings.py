@@ -166,3 +166,308 @@ b_inst.to_file(main_destination+"institutional", driver='ESRI Shapefile')
 # other
 b_r = w.loc[w['building'] == 'other']
 b_r.to_file(main_destination+"other", driver='ESRI Shapefile')
+
+
+
+
+import osmium
+
+import pandas as pd
+
+from shapely.geometry import Polygon, LineString
+
+import geopandas as gpd
+
+from geopandas import GeoDataFrame
+
+ 
+
+class UrbanHandler(osmium.SimpleHandler):
+
+    def __init__(self):
+
+        osmium.SimpleHandler.__init__(self)
+
+        self.buildings = []
+
+        self.landuse = []
+
+        self.roads = []
+
+ 
+
+    def area(self, a):
+
+            if 'building' in a.tags or 'landuse' in a.tags:
+
+                try:
+
+                    outer_ring = list(a.outer_rings())[0]
+
+                    polygon_coords = [(node.lon, node.lat) for node in outer_ring]
+
+                    if 'building' in a.tags:
+
+                        self.buildings.append([
+
+                            a.id, a.tags.get('building'), Polygon(polygon_coords)
+
+                        ])
+
+                    elif 'landuse' in a.tags:
+
+                        self.landuse.append([
+
+                            a.id, a.tags.get('landuse'), Polygon(polygon_coords)
+
+                        ])
+
+                except Exception as e:
+
+                    print(f"Error processing area with ID {a.id}: {e}")
+
+    def way(self, w):
+
+        if "highway" in w.tags:
+
+            try:
+
+                nodes = [(node.lon, node.lat) for node in w.nodes if node.location.valid()]
+
+                if len(nodes) >= 2:
+
+                    linestring = LineString(nodes)
+
+                    self.roads.append({
+
+                        'osm_id': w.id,
+
+                        'highway': w.tags['highway'],
+
+                        'length': linestring.length * 111139,  # Convert degrees to meters approximately
+
+                        'geometry': linestring
+
+                    })
+
+            except Exception as e:
+
+                print(f"Error processing road with ID {w.id}: {e}")
+
+ 
+
+def load_data(pbf_path):
+
+    handler = UrbanHandler()
+
+    handler.apply_file(pbf_path)
+
+    buildings_df = pd.DataFrame(handler.buildings, columns=['osm_id', 'building', 'geometry'])
+
+    landuse_df = pd.DataFrame(handler.landuse, columns=['osm_id', 'landuse', 'geometry'])
+
+    roads_df = pd.DataFrame(handler.roads)
+
+    return buildings_df, landuse_df, roads_df
+
+ 
+
+def create_geodataframes(buildings_df, landuse_df, roads_df):
+
+    # Create GeoDataFrame for buildings, including only 'osm_id' and 'building'
+
+    buildings_gdf = GeoDataFrame(buildings_df, columns=['osm_id', 'building', 'geometry'], geometry='geometry')
+
+ 
+
+    # Create GeoDataFrame for land use, including only 'osm_id' and 'landuse'
+
+    landuse_gdf = GeoDataFrame(landuse_df, columns=['osm_id', 'landuse', 'geometry'], geometry='geometry')
+
+ 
+
+    # Create GeoDataFrame for roads, including 'osm_id', 'highway', 'length', and 'geometry'
+
+    if not roads_df.empty:
+
+        roads_gdf = GeoDataFrame(roads_df, geometry='geometry')
+
+    else:
+
+        roads_gdf = GeoDataFrame(columns=['osm_id', 'highway', 'length', 'geometry'])
+
+ 
+
+    return buildings_gdf, landuse_gdf, roads_gdf
+
+ 
+
+def classify_landuse_and_buildings(gdf, feature_type):
+
+    # Mappings for classification
+
+    mappings = {
+
+        'landuse': {
+
+            'farmland': 'agricultural',
+
+            'farmyard': 'agricultural',
+
+            'vineyard': 'agricultural',
+
+            'education': 'educational',
+
+            'retail': 'commercial',
+
+            'industrial': 'industrial',
+
+            'residential': 'residential'
+
+        },
+
+        'building': {
+
+            'warehouse': 'industrial',
+
+            'vineyard': 'agricultural',
+
+            'community_center': 'institutional',
+
+            'hospital': 'institutional',
+
+            'government': 'institutional',
+
+            'public': 'institutional',
+
+            'fire_station': 'institutional',
+
+            'apartments': 'residential',
+
+            'house': 'residential',
+
+            'cabin': 'residential',
+
+            'semidetached_house': 'residential',
+
+            'dormitory': 'residential',
+
+            'retail': 'commercial',
+
+            'office': 'commercial',
+
+            'motel': 'commercial',
+
+            'hotel': 'commercial',
+
+            'hostel': 'commercial',
+
+            'kindergarten': 'educational',
+
+            'school': 'educational',
+
+            'university': 'educational',
+
+            'class_room': 'educational',
+
+            'farm_auxiliary': 'agricultural',
+
+            'garage': 'commercial',
+
+            'detached': 'residential',
+
+            'garages': 'commercial',
+
+            'semidetached_house': 'residential',
+
+            'carport': 'commercial',
+
+            'terrace': 'residential',
+
+            'outbuilding': 'residential',
+
+            'shed': 'residential',
+
+            'barn': 'agricultural',
+
+            'container': 'commercial',
+
+            'storage': 'commercial'
+
+        }
+
+    }
+
+ 
+
+    default_classifications = ['residential', 'commercial', 'agricultural', 'educational', 'institutional', 'industrial', 'other']
+
+ 
+
+    # Apply mappings
+
+    if feature_type in mappings:
+
+        gdf[feature_type] = gdf[feature_type].map(mappings[feature_type]).fillna('other')
+
+ 
+
+    # Ensure default classifications for any unclassified types
+
+    if feature_type == 'building':
+
+        gdf.loc[~gdf['building'].isin(default_classifications), 'building'] = 'other'
+
+    elif feature_type == 'landuse':
+
+        gdf.loc[~gdf['landuse'].isin(default_classifications), 'landuse'] = 'other'
+
+
+def save_data(gdf, feature_type, destination):
+
+    if not gdf.empty:
+
+        file_path = f"{destination}{feature_type}.shp"
+
+        gdf.to_file(file_path)
+
+        gdf.to_csv(f"{destination}{feature_type}.csv", encoding="utf8")
+
+        print(f"{feature_type.capitalize()} shapefiles and CSV saved successfully at {file_path}")
+
+
+if __name__ == "__main__":
+
+    pbf_file_path = "../data/01_raw_input_data/02-UrbanInfrastructure.osm.pbf" # here you should mentioned your pbf file path
+
+    main_destination = "../data/02_urban_output_data/Christchurch_new/" # Here is just the name of your folder where you want to let your results
+
+   
+
+    # Load data from PBF file
+
+    buildings_df, landuse_df, roads_df = load_data(pbf_file_path)
+
+   
+
+    # Create separate GeoDataFrames for buildings, land use, and roads
+
+    buildings_gdf, landuse_gdf, roads_gdf = create_geodataframes(buildings_df, landuse_df, roads_df)
+
+   
+
+    # Classify buildings and land use
+
+    classify_landuse_and_buildings(buildings_gdf, 'building')
+
+    classify_landuse_and_buildings(landuse_gdf, 'landuse')
+
+   
+
+    # Save GeoDataFrames to Shapefile
+
+    save_data(buildings_gdf, 'buildings', main_destination)
+
+    save_data(landuse_gdf, 'landuse', main_destination)
+
+    save_data(roads_gdf, 'roads', main_destination)
