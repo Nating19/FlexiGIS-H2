@@ -35,7 +35,7 @@ The OpenStreetMap (OSM) data is available under the Open Database License (ODbL)
 
 ## Acknowledgments
 
-We thank the Catalyst: Strategic Fund, administered by the Ministry of Business Innovation and Employment of New Zealand, and the German Federal Ministry of Education and Research (grant number 03SF0690) for supporting the project HINT (New Zealand-German Platform for Green Hydrogen Integration).
+We thank the Catalyst: Strategic Fund, administered by the Ministry of Business Innovation and Employment of New Zealand, and the German Federal Ministry of Education and Research (grant number 03SF0690) for supporting the project [HINT](https://www.canterbury.ac.nz/research/about-uc-research/research-groups-and-centres/sustainable-energy-research-group/new-zealand-german-platform-for-green-hydrogen-integration--hint) (New Zealand-German Platform for Green Hydrogen Integration).
 
 ## Contact
 
