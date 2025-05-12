@@ -2,6 +2,8 @@
 
 FlexiGIS-H2 stands for Flexibilisation in Geographic Information Systems (GIS) - Hydrogen. The tool extracts, filters and categorises the geo-referenced urban energy infrastructure, simulates local electricity generation from distributed energy resources, and hydrogen production potential from residential solar photovoltaic (PV) surplus.
 
+![status](https://img.shields.io/badge/status-in_development-yellow)
+
 ## System requirements
 
 FlexiGIS-H2 is developed and tested on Linux (Ubuntu 22.04.5). The tools and software used in FlexiGIS-H2 and their versions are listed in the following:
@@ -22,13 +24,8 @@ To use the FlexiGIS-H2 spatial-temporal platform download the FlexiGIS-H2 code a
   - │   ├── 02_urban_output_data
   - │   ├── 03_urban_energy_requirements
   - │   └── 04_Visualisation
-  - ├── doc
   - ├── README.md
   - └── requirements.txt
-
-## Publications List
-
-To see the list of publications jump to [publications](https://flexigis.readthedocs.io/en/latest/#publications-list).
 
 ## License
 
